@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">prueba_tecnica</string>
+    <string name="no_internet">Ops, we could not find an active internet connection…</string>
+    <string name="error">Ops, something is not right…</string>
+    <string name="closed">CLOSED</string>
+    <string name="no_results">No results :(</string>
+    <string name="search">Search Image</string>
+    <string name="all_images">All images</string>
+    <string name="favorite">Favorites</string>
+    <string name="add_favr">Added to Favorites</string>
+    <string name="remove_favr">Removed from Favorites</string>
+
+    <string name="add_fav">Add favorite</string>
+    <string name="image_add">Image was added to favorites</string>
+    <string name="name_event">add_favotite</string>
+    <string name="name_removed">Removed favorite</string>
+    <string name="image_remov">Image was removed from favorites</string>
+    <string name="name_event_remov">removed_favorite</string>
+    <string name="select">Select item</string>
+    <string name="selected">The image with id was selected</string>
+
+
+    <string name="api">https://pixabay.com/api/?key=21665025-e012a3abd9d09a8bb97b9a716&amp;q=yellow+flowers&amp;image_type=photo</string>
+    <string name="title">Gallery</string>
+    <string name="url">url</string>
+    <string name="hits">hits</string>
+    <string name="title_fav">Favorites</string>
+
+
+</resources>

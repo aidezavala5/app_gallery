@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "324863272587",
+    "project_id": "pruebatecnica-samaya",
+    "storage_bucket": "pruebatecnica-samaya.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324863272587:android:1a599bf9c6d9912674168e",
+        "android_client_info": {
+          "package_name": "com.example.prueba_tecnica"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "324863272587-mb7bl43jlfdepabbnn0u5rf551ftum9c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDq5n7dczKXPe9Pea9pV3TaqpaLoYhUmbM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "324863272587-mb7bl43jlfdepabbnn0u5rf551ftum9c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
