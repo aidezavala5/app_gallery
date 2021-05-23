@@ -1,6 +1,5 @@
 # app_gallery
-Aplicación que muestra una galería de imágenes , búsqueda agregado y eliminado de  favoritos
-Aplicaciones de captura de pantalla
+Aplicación que muestra una galería de 20 imagenes , agrega y elimina de favoritos las imagenes ademas de que se puede realizar busqueda por titulo de las imagenes.Y registra la seleccion , agregado de favoritos y eliminacion de favoritos en Firebase analytics
 -Galeria de Imagenes:![alt text](https://github.com/aidezavala5/app_gallery/blob/main/imagenes/Screenshot_2021-05-22-18-30-22-430_com.example.prueba_tecnica.jpg)
 -Pulsando el corazon se puede agregar a Favoritos: ![alt text](https://github.com/aidezavala5/app_gallery/blob/main/imagenes/Screenshot_2021-05-22-18-30-46-247_com.example.prueba_tecnica.jpg)
 -Pulsando nuevamente(cuando ya esta en rojo) se elimina de favoritos ![alt text](https://github.com/aidezavala5/app_gallery/blob/main/imagenes/Screenshot_2021-05-22-18-30-40-720_com.example.prueba_tecnica.jpg)
