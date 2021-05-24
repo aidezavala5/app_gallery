@@ -14,13 +14,16 @@ public class FavoriteContract {
     interface View {
 
         void setMsjError();
+
         void sowFavorites(List<Imagen> fav);
 
 
     }
+
     interface Presenter {
 
         void getFavorites(Context context, SharedPreference sharedPreference);
+
         void setAnalyticsItemSelect(FirebaseAnalytics mFirebaseAnalytics, Context context, Imagen image);
     }
 }

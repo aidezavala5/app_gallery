@@ -12,15 +12,20 @@ public class GalleryContract {
     interface View {
 
         void setMsjError();
+
         void setArrayImages(ArrayList<Imagen> images);
 
 
     }
+
     interface Presenter {
 
         void loadImages(Context context);
-        void  searchImage(Context context, String title);
+
+        void searchImage(Context context, String title);
+
         boolean isOnline(Context context);
+
         void setAnalyticsItemSelect(FirebaseAnalytics mFirebaseAnalytics, Context context, Imagen image);
     }
 }

@@ -5,7 +5,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 
-
 public class DetailsPresenter implements DetailsContract.Presenter {
     private DetailsContract.View mView;
 
@@ -13,9 +12,14 @@ public class DetailsPresenter implements DetailsContract.Presenter {
         this.mView = mView;
     }
 
-    public  boolean isOnline(Context context) {
+    public boolean isOnline(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        return networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

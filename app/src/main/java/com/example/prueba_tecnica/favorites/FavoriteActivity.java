@@ -25,6 +25,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.List;
 
+//clase para mostrar las imagenes favoritas guardadas
 public class FavoriteActivity extends AppCompatActivity implements AdapterFavorites.OnItemClickListener , FavoriteContract.View {
 
     private RecyclerView recyclerView;
@@ -54,7 +55,7 @@ public class FavoriteActivity extends AppCompatActivity implements AdapterFavori
 
     @Override
     public void setMsjError() {
-        Snackbar snackbar = Snackbar.make(getApplication(), getWindow().getCurrentFocus() , getResources().getString(R.string.no_internet), Snackbar.LENGTH_INDEFINITE).setAction(R.string.closed, new View.OnClickListener() {
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content) , getResources().getString(R.string.no_internet), Snackbar.LENGTH_INDEFINITE).setAction(R.string.closed, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -76,12 +77,6 @@ public class FavoriteActivity extends AppCompatActivity implements AdapterFavori
     @Override
     public void onItemClickListener(Imagen image) {
         mPresenter.setAnalyticsItemSelect(mFirebaseAnalytics,getApplicationContext(),image);
-        /*Bundle bundle = new Bundle();
-        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, image.getId());
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getResources().getString(R.string.select));
-        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, getResources().getString(R.string.selected)+image.getId());
-        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM, bundle);*/
-
         Intent intent = new Intent(this, DetailsActivity.class);
         intent.putExtra(getResources().getString(R.string.url),image.getImageURL());
         startActivity(intent);

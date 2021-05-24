@@ -31,14 +31,14 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GalleryActivity extends AppCompatActivity implements AdapterImagen.OnItemClickListener , GalleryContract.View {
+//clase para mostrar la galeria principal de imagenes
+public class GalleryActivity extends AppCompatActivity implements AdapterImagen.OnItemClickListener, GalleryContract.View {
 
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
     private GalleryContract.Presenter mPresenter;
-    private Toolbar toolbar;
     private MenuItem searchMenuItem;
-    private  TextView noResults;
+    private TextView noResults;
     private FirebaseAnalytics mFirebaseAnalytics;
     SharedPreference sharedPreference;
 
@@ -64,7 +64,7 @@ public class GalleryActivity extends AppCompatActivity implements AdapterImagen.
 
 
     @Override
-    public boolean onCreateOptionsMenu (Menu menu){
+    public boolean onCreateOptionsMenu(Menu menu) {
 
         getMenuInflater().inflate(R.menu.menu, menu);
         searchMenuItem = menu.findItem(R.id.action_search);
@@ -82,17 +82,15 @@ public class GalleryActivity extends AppCompatActivity implements AdapterImagen.
             case R.id.action_favorite:
 
                 List<Imagen> favorites = sharedPreference.getFavorites(GalleryActivity.this);
-                if (favorites.size() > 0) {
-                    Intent intent = new Intent(this, FavoriteActivity.class);
-                    startActivity(intent);
-                }else{
-                    Snackbar snackbar = Snackbar.make(recyclerView, "no hay favoritos", Snackbar.LENGTH_INDEFINITE).setAction(R.string.closed, new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                        }
-                    });
-                    snackbar.show();
+                if(favorites!=null) {
+                    if (favorites.size() > 0) {
+                        Intent intent = new Intent(this, FavoriteActivity.class);
+                        startActivity(intent);
+                    } else {
+                        showNotFav();
+                    }
+                }else {
+                    showNotFav();
                 }
                 return true;
             default:
@@ -108,7 +106,7 @@ public class GalleryActivity extends AppCompatActivity implements AdapterImagen.
             recyclerView.setVisibility(View.GONE);
             progressBar.setVisibility(View.VISIBLE);
             noResults.setVisibility(View.GONE);
-            mPresenter.searchImage(GalleryActivity.this,title.toUpperCase());
+            mPresenter.searchImage(GalleryActivity.this, title.toUpperCase());
             return true;
         }
 
@@ -117,8 +115,6 @@ public class GalleryActivity extends AppCompatActivity implements AdapterImagen.
             return false;
         }
     };
-
-
 
 
     @Override
@@ -131,7 +127,7 @@ public class GalleryActivity extends AppCompatActivity implements AdapterImagen.
             GridLayoutManager mLayoutManager = new GridLayoutManager(GalleryActivity.this, 2);
             recyclerView.setLayoutManager(mLayoutManager);
 
-            AdapterImagen adapterImagen = new AdapterImagen(images, GalleryActivity.this, GalleryActivity.this::onItemClickListener,mFirebaseAnalytics);
+            AdapterImagen adapterImagen = new AdapterImagen(images, GalleryActivity.this, GalleryActivity.this::onItemClickListener, mFirebaseAnalytics);
             recyclerView.setAdapter(adapterImagen);
         } else {
             noResults.setVisibility(View.VISIBLE);
@@ -153,15 +149,11 @@ public class GalleryActivity extends AppCompatActivity implements AdapterImagen.
     @Override
     public void onItemClickListener(Imagen image) {
 
-      /*  Bundle bundle = new Bundle();
-        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, image.getId());
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, getResources().getString(R.string.select));
-        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, getResources().getString(R.string.selected)+image.getId());
-        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM, bundle);*/
-        mPresenter.setAnalyticsItemSelect(mFirebaseAnalytics,getApplicationContext(),image);
+
+        mPresenter.setAnalyticsItemSelect(mFirebaseAnalytics, getApplicationContext(), image);
 
         Intent intent = new Intent(this, DetailsActivity.class);
-        intent.putExtra(getResources().getString(R.string.url),image.getImageURL());
+        intent.putExtra(getResources().getString(R.string.url), image.getImageURL());
         startActivity(intent);
 
     }
@@ -172,6 +164,13 @@ public class GalleryActivity extends AppCompatActivity implements AdapterImagen.
 
     }
 
+public void showNotFav(){
+    Snackbar snackbar = Snackbar.make(recyclerView, getResources().getString(R.string.not_fav), Snackbar.LENGTH_INDEFINITE).setAction(R.string.closed, new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
 
-
+        }
+    });
+    snackbar.show();
+}
 }

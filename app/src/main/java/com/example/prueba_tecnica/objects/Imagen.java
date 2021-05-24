@@ -1,6 +1,7 @@
 package com.example.prueba_tecnica.objects;
 
 import android.text.TextUtils;
+
 //Clase que contiene el objeto Imagen
 public class Imagen {
     private String id;

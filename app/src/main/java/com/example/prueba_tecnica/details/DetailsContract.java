@@ -9,13 +9,13 @@ import java.util.ArrayList;
 public class DetailsContract {
 
 
-        interface View {
+    interface View {
 
-        }
+    }
 
-        interface Presenter {
+    interface Presenter {
 
-            boolean isOnline(Context context);
-        }
+        boolean isOnline(Context context);
+    }
 
 }

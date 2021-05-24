@@ -41,7 +41,7 @@ public class SharedPreference {
         editor.commit();
     }
 
-    public void addFavorite(Context context, Imagen image,FirebaseAnalytics mFirebaseAnalytics) {
+    public void addFavorite(Context context, Imagen image, FirebaseAnalytics mFirebaseAnalytics) {
         List<Imagen> favorites = getFavorites(context);
         if (favorites == null)
             favorites = new ArrayList<Imagen>();
@@ -49,13 +49,13 @@ public class SharedPreference {
         saveFavorites(context, favorites);
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, image.getId());
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME,  context.getResources().getString(R.string.add_fav));
-        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, context.getResources().getString(R.string.image_add)+image.getId());
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, context.getResources().getString(R.string.add_fav));
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, context.getResources().getString(R.string.image_add) + image.getId());
         Bundle params = new Bundle();
         mFirebaseAnalytics.logEvent(context.getResources().getString(R.string.name_event), params);
     }
 
-    public void removeFavorite(Context context,int pos, FirebaseAnalytics mFirebaseAnalytics, Imagen image) {
+    public void removeFavorite(Context context, int pos, FirebaseAnalytics mFirebaseAnalytics, Imagen image) {
         ArrayList<Imagen> favorites = getFavorites(context);
         if (favorites != null) {
             favorites.remove(pos);
@@ -63,7 +63,7 @@ public class SharedPreference {
             Bundle bundle = new Bundle();
             bundle.putString(FirebaseAnalytics.Param.ITEM_ID, image.getId());
             bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, context.getResources().getString(R.string.name_removed));
-            bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, context.getResources().getString(R.string.image_remov)+image.getId());
+            bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, context.getResources().getString(R.string.image_remov) + image.getId());
             Bundle params = new Bundle();
             mFirebaseAnalytics.logEvent(context.getResources().getString(R.string.name_event_remov), params);
         }

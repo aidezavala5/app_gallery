@@ -67,22 +67,20 @@ public class GalleryPresenter implements GalleryContract.Presenter {
                     new com.android.volley.Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            // initSnackbar(R.string.error);
                             mView.setMsjError();
 
                         }
                     });
             requestQueue.add(jsObjectRequest);
 
-        }else{
+        } else {
             mView.setMsjError();
         }
     }
 
 
-
     @Override
-    public void  searchImage(Context context, String title) {
+    public void searchImage(Context context, String title) {
 
         ArrayList<Imagen> imagenList1 = new ArrayList<>();
         String sURL = context.getResources().getString(R.string.api);
@@ -93,19 +91,19 @@ public class GalleryPresenter implements GalleryContract.Presenter {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            Imagen imagen = new Imagen("", "","");
+                            Imagen imagen = new Imagen("", "", "");
                             JSONArray jsonArray = response.getJSONArray(context.getResources().getString(R.string.hits));
                             for (int i = 0; i < 20; i++) {
                                 JSONObject hit = jsonArray.getJSONObject(i);
                                 String imageUrl = hit.getString(IMAGE_TAG);
                                 String title = hit.getString(TITLE_TAG);
-                                String id= hit.getString(ID_TAG);
+                                String id = hit.getString(ID_TAG);
                                 imagen.setImageURL(imageUrl);
                                 imagen.setTags(title);
-                                imagenList1.add(new Imagen(imageUrl, title,id));
+                                imagenList1.add(new Imagen(imageUrl, title, id));
 
                             }
-                            search(title,imagenList1);
+                            search(title, imagenList1);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -116,7 +114,6 @@ public class GalleryPresenter implements GalleryContract.Presenter {
                 new com.android.volley.Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // initSnackbar(R.string.error);
                         mView.setMsjError();
 
                     }
@@ -125,26 +122,30 @@ public class GalleryPresenter implements GalleryContract.Presenter {
 
     }
 
-    public void search(String title,ArrayList<Imagen>listImagen) {
-        ArrayList<Imagen> resultImage= new ArrayList<>();
+    public void search(String title, ArrayList<Imagen> listImagen) {
+        ArrayList<Imagen> resultImage = new ArrayList<>();
         for (int i = 0; i < listImagen.size(); i++) {
             if (listImagen.get(i).getTags().contains(title)) {
-               resultImage.add(listImagen.get(i));
+                resultImage.add(listImagen.get(i));
             }
         }
-        if(resultImage.size()>0){
+        if (resultImage.size() > 0) {
             mView.setArrayImages(resultImage);
-        }else{
+        } else {
             mView.setArrayImages(resultImage);
         }
     }
 
 
-
-    public  boolean isOnline(Context context) {
+    public boolean isOnline(Context context) {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
-        return networkInfo != null && networkInfo.isAvailable() && networkInfo.isConnected();
+
+        if (networkInfo != null && networkInfo.isConnected()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -152,7 +153,7 @@ public class GalleryPresenter implements GalleryContract.Presenter {
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, image.getId());
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, context.getString(R.string.select));
-        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, context.getString(R.string.selected)+image.getId());
+        bundle.putString(FirebaseAnalytics.Param.CONTENT_TYPE, context.getString(R.string.selected) + image.getId());
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_ITEM, bundle);
     }
 }

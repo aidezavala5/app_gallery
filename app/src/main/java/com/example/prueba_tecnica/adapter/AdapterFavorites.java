@@ -18,7 +18,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.List;
 
-public class AdapterFavorites  extends RecyclerView.Adapter<AdapterFavorites.PixabayImageViewHolder> {
+//Adaptador para mostrar las imagenes que estan guardadas en favoritos
+public class AdapterFavorites extends RecyclerView.Adapter<AdapterFavorites.PixabayImageViewHolder> {
 
     private List<Imagen> pixabayImageList;
     private Context context;

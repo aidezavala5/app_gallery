@@ -23,9 +23,10 @@ import com.example.prueba_tecnica.favorites.FavoritePresenter;
 import com.example.prueba_tecnica.gallery.GalleryContract;
 import com.google.android.material.snackbar.Snackbar;
 
-public class DetailsActivity extends AppCompatActivity implements  DetailsContract.View {
+//Clase para ver los detalles de la imagen
+public class DetailsActivity extends AppCompatActivity implements DetailsContract.View {
 
-    private  ImageView imageView;
+    private ImageView imageView;
     private DetailsContract.Presenter mPresenter;
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -33,7 +34,7 @@ public class DetailsActivity extends AppCompatActivity implements  DetailsContra
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.details_imagen);
-        imageView= findViewById(R.id.imagen_details);
+        imageView = findViewById(R.id.imagen_details);
         mPresenter = new DetailsPresenter(this);
         Intent intent = getIntent();
         String url = intent.getStringExtra(getResources().getString(R.string.url));
@@ -54,13 +55,13 @@ public class DetailsActivity extends AppCompatActivity implements  DetailsContra
 
     }
 
-    private void showImage( String url){
-        if(mPresenter.isOnline(DetailsActivity.this)) {
+    private void showImage(String url) {
+        if (mPresenter.isOnline(DetailsActivity.this)) {
             Glide.with(this)
                     .load(url)
                     .placeholder(R.drawable.ic_launcher_background)
                     .into(imageView);
-        }else{
+        } else {
             setMsjError();
         }
     }
@@ -68,7 +69,7 @@ public class DetailsActivity extends AppCompatActivity implements  DetailsContra
 
     public void setMsjError() {
 
-        Snackbar snackbar = Snackbar.make(getApplication(), getWindow().getCurrentFocus() , getResources().getString(R.string.no_internet), Snackbar.LENGTH_INDEFINITE).setAction(R.string.closed, new View.OnClickListener() {
+        Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content), getResources().getString(R.string.no_internet), Snackbar.LENGTH_INDEFINITE).setAction(R.string.closed, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

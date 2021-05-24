@@ -25,6 +25,7 @@
     <string name="url">url</string>
     <string name="hits">hits</string>
     <string name="title_fav">Favorites</string>
+    <string name="not_fav">Not be added to favorites</string>
 
 
 </resources>

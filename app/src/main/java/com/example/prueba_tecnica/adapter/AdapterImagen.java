@@ -18,6 +18,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.List;
 
+//Adaptador para mostrar la galeria de imagenes
 public class AdapterImagen extends RecyclerView.Adapter<AdapterImagen.PixabayImageViewHolder> {
 
     private List<Imagen> pixabayImageList;
@@ -28,16 +29,16 @@ public class AdapterImagen extends RecyclerView.Adapter<AdapterImagen.PixabayIma
     private FirebaseAnalytics mFirebaseAnalytics;
 
 
-    public AdapterImagen(List<Imagen> pixabayImageList, Context context, AdapterImagen.OnItemClickListener listener,FirebaseAnalytics mFirebaseAnalytics) {
+    public AdapterImagen(List<Imagen> pixabayImageList, Context context, AdapterImagen.OnItemClickListener listener, FirebaseAnalytics mFirebaseAnalytics) {
         this.pixabayImageList = pixabayImageList;
         this.context = context;
         this.listener = listener;
         this.sharedPreference = new SharedPreference();
-        this.mFirebaseAnalytics=mFirebaseAnalytics;
+        this.mFirebaseAnalytics = mFirebaseAnalytics;
     }
 
     @Override
-    public PixabayImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType ) {
+    public PixabayImageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_imagen, parent, false);
@@ -69,9 +70,9 @@ public class AdapterImagen extends RecyclerView.Adapter<AdapterImagen.PixabayIma
 
         );
 
-        if (checkFavoriteItem(pixabayImageList.get(position),false)){
+        if (checkFavoriteItem(pixabayImageList.get(position), false)) {
             holder.favorite.setImageResource(R.drawable.ic_heart);
-        }else{
+        } else {
             holder.favorite.setImageResource(R.drawable.ic_heart_white);
         }
 
@@ -87,7 +88,7 @@ public class AdapterImagen extends RecyclerView.Adapter<AdapterImagen.PixabayIma
                             Toast.LENGTH_SHORT).show();
                 } else {
                     holder.favorite.setImageResource(R.drawable.ic_heart);
-                    sharedPreference.addFavorite(context, pixabayImageList.get(position),mFirebaseAnalytics);
+                    sharedPreference.addFavorite(context, pixabayImageList.get(position), mFirebaseAnalytics);
                     Toast.makeText(context,
                             context.getResources().getString(R.string.add_favr),
                             Toast.LENGTH_SHORT).show();
@@ -113,7 +114,7 @@ public class AdapterImagen extends RecyclerView.Adapter<AdapterImagen.PixabayIma
             super(v);
             this.imageView = itemView.findViewById(R.id.imagen);
             this.title = itemView.findViewById(R.id.title);
-            this.favorite= itemView.findViewById(R.id.image_favorite);
+            this.favorite = itemView.findViewById(R.id.image_favorite);
             this.favorite.setImageResource(R.drawable.ic_heart_white);
         }
     }
@@ -133,13 +134,13 @@ public class AdapterImagen extends RecyclerView.Adapter<AdapterImagen.PixabayIma
 
     public boolean checkFavoriteItem(Imagen checkImagen, Boolean onClick) {
         boolean check = false;
-        int i=0;
+        int i = 0;
         List<Imagen> favorites = sharedPreference.getFavorites(context);
         if (favorites != null) {
             for (Imagen product : favorites) {
                 if (product.getId().equals(checkImagen.getId())) {
                     check = true;
-                    if(onClick) {
+                    if (onClick) {
                         sharedPreference.removeFavorite(context, i, mFirebaseAnalytics, product);
                     }
                     break;
